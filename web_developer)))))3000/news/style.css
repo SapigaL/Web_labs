@@ -1,0 +1,182 @@
+
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+}
+.navbar {
+  position: fixed;
+  background-color: #000000;
+  width: 100%;
+
+}
+
+.navbar a {
+   float: left;
+   font-size: 16px;
+   color: white;
+   text-align: center;
+   padding: 14px 16px;
+   text-decoration: none;
+}
+
+.dropdown {
+   float: left;
+   overflow: hidden;
+}
+
+.dropdown .dropbtn {
+   font-size: 16px;
+   border: none;
+   outline: none;
+   color: white;
+   padding: 14px 16px;
+   background-color: inherit;
+   font-family: inherit;
+   margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+   background-color: #333;
+}
+
+.dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #f9f9f9;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+}
+
+.dropdown-content a {
+   float: none;
+   color: black;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+   text-align: left;
+}
+
+.dropdown-content a:hover {
+   background-color: #FFFFFF;
+}
+
+.dropdown:hover .dropdown-content {
+   display: block;
+}
+.imgg{
+  margin-top: 4px;
+  animation-name: spin;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+ float: right;
+ height: 35px;
+ width: 35px;
+}
+.imggg{
+
+ width: 100%;
+ height: auto;
+}
+@keyframes spin {
+  from{
+    transform: rotate(0deg);
+
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+.top{
+
+
+   width: 1440px;
+  padding-top: 46px;
+}
+
+.text{
+  color:#A9A9A9;
+}
+p{
+  margin-bottom: 20px;
+  font-size:15;
+  color:#333;
+
+}
+h1{
+  padding-top:100px;
+  color:#000000;
+  text-align: center;
+
+}
+
+h2{
+  color:#000000
+}
+
+table{width: 900px;
+
+}
+td{
+  margin:15px;
+  background-color:#FFFFFF;
+}
+
+}
+.content_table{
+  background-color:#63ADD0
+}
+td.solid {
+  border-style: solid;
+border-width: 1px;}
+.div_news{
+  text-align: center;
+  width: 300px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-block;
+
+}
+.aour_div{
+  width: 100%
+}
+.content_text{
+  border-style: solid;
+
+
+  text-align:center;
+}
+.border_text{
+  border-style:solid;
+   border-top: 2px;
+   border-left: 2px;
+   border-right: 2px;
+}
+.content_img{
+  width:300px;
+  height:250px;
+  transition: transform .2s;
+}
+.content_img:hover {
+
+    transform: scale(1.16);
+}
+footer{
+
+position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 20px;
+  height: 100px;
+  align:center;
+  background-color:#000000
+}
+.foooter{
+
+  color:#FFFFFF;
+  align:center;
+  margin-bottom: 20px;
+  padding-top: 50px;
+}
