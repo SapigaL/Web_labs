@@ -157,7 +157,7 @@ border-width: 1px;}
 .content_img{
   width:300px;
   height:250px;
-  transition: transform .2s;
+  transition: transform .3s;
 }
 .content_img:hover {
 
@@ -165,10 +165,11 @@ border-width: 1px;}
 }
 footer{
 
-position: absolute;
+position: relative;
   bottom: 0;
   width: 100%;
-  padding-top: 20px;
+  margin-top:80px;
+  padding-top:10px;
   height: 100px;
   align:center;
   background-color:#000000
