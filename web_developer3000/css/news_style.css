@@ -3,15 +3,7 @@ body{
   margin: 0;
   padding: 0;
   background-color: #FFFFFF;}
-.imgg{
-  margin-top: 4px;
-  animation-name: spin;
-  animation-iteration-count: infinite;
-  animation-duration: 2s;
- float: right;
- height: 35px;
- width: 35px;
-}
+
 yframes spin {
   from{
     transform: rotate(0deg);
@@ -99,6 +91,10 @@ h1{
 .content_img:hover {
 
     transform: scale(1.16);
+}
+.imgg{
+ height: 46px;
+ width: 60px;
 }
 
 footer{
