@@ -27,12 +27,10 @@ var useLocalStorage = false;
  button.addEventListener('click', function() {
      alert(add);
  }, false);
-
  return `
  <a href="blog-ici.html">
    <div class="col-lg-4">
      <div class="card">
-     <img src="${picture}">
      <h4>alt="${title}"</h4>
      <p>${body}</p>
      <a >Read More</a>

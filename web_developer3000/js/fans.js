@@ -1,4 +1,5 @@
-var useLocalStorage = false;
+var useLocalStorage = false
+;
 
 function switchUseLS(){
   useLocalStorage = !useLocalStorage;
@@ -9,7 +10,7 @@ window.isOnline = () => this.navigator.onLine;
 const getById = id => document.getElementById(id);
 
 const feedbackContainer = getById('container');
-const form = getById('form_appeal');
+const form = getById('form1');
 const namearea = getById('name');
 const textarea = getById('text');
 
@@ -17,8 +18,8 @@ class Feedback{
   constructor(name, text, date, time){
     this.name = name;
     this.text = text;
-    this.date = date; = time
-    this.time;
+    this.date = date;
+    this.time = time;
   }
 }
 
@@ -28,7 +29,7 @@ var text = feedback.text;
 var date = feedback.date;
 var time = feedback.time;
 
-return`
+return `
     <div class="container">
         <br>
         <p>
@@ -37,31 +38,29 @@ return`
         </p>
         <br>
         <span class="review-date">${date}, ${time}</span>
-        <span class="author">${name}</span>
+        <span class="review-author">${name}</span>
     </div>
     <div class="divider"></div>
 `
 }
 
-const addDataReadToStorage = (online) => {
+const initAndRenderData = (online) => {
   if(useLocalStorage){
-      if (isOnline()) return;
+      if (!isOnline()) return;
       const data = localStorage.getItem('feedbacks-data');
 
-  console.log('Reading from local storage');
-
-  if (!data) {
-    console.log('No local data available');
+      if (!data) {
+        console.log('Нема доступних локальних даних');
+      } else {
+        JSON.parse(data).forEach(({ name, text, date, time }) => {
+            var tempFeedback = new Feedback(name, text, date, time);
+            $('#container').prepend(
+            feedbackTemplate(tempFeedback),
+            );
+        });
+      }
   } else {
-    JSON.parse(data).forEach(({name, text, date, time }) => {
-        console.log(name, text, date, time);
-        $('#container').prepend(
-        feedbackTemplate(name, text, date, time),
-        );
-      });
-    }
-  }  else {
-  var openDB = indexedDB.open("feedbacks-data", 1);
+      var openDB = indexedDB.open("feedbacks-data", 1);
       openDB.onupgradeneeded = function() {
           var db = openDB.result;
           var store = db.createObjectStore("feedbacks", {keyPath: "name"});
@@ -79,7 +78,7 @@ const addDataReadToStorage = (online) => {
 
           if (cursor) {
             var tempFeed = new Feedback(cursor.value.name, cursor.value.text, cursor.value.date, cursor.value.time);
-              console.log(tempFeed);
+              //console.log(tempFeed);
               //feedbacks.push(tempFeed);
               $('#container').prepend(feedbackTemplate(tempFeed));
               cursor.continue();
@@ -92,13 +91,13 @@ const addDataReadToStorage = (online) => {
   }
 }
 
-function addToLocal(feedback) {
+function writeLocally(feedback){
   if(useLocalStorage){
-  const item = localStorage.getItem('feedbacks-data')
-  let data = item ? JSON.parse(item) : [];
-  data.push(obj);
-  localStorage.setItem('feedbacks-data', JSON.stringify(data))
- }
+      const item = localStorage.getItem('feedbacks-data')
+      let data = item ? JSON.parse(item) : [];
+      data.push(feedback);
+      localStorage.setItem('feedbacks-data', JSON.stringify(data));
+  }
   else {
     var openDB = indexedDB.open("feedbacks-data", 1);
 
@@ -124,45 +123,38 @@ function addToLocal(feedback) {
   }
 }
 
-
 const onSubmitPress = (e) => {
   e.preventDefault();
 
   const isValid = (textarea.value.length > 0 && namearea.value.length > 0);
-  form.classList.add('was-validated')
 
   if (!isValid) return;
 
   const date = new Date();
+
   var feedback = new Feedback(namearea.value, textarea.value, date.toLocaleDateString(), date.toLocaleTimeString());
 
-  if(navigator.onLine){
-     $('#container').prepend(
-      feedbackTemplate(feedback)
-     );
-  }
 
-  addToLocal(feedback);
+
+
+  writeLocally(feedback);
 
   form.classList.remove('was-validated');
   namearea.value = '';
   textarea.value = '';
-
 }
 
 const onOnline = () => {
-  addDataReadToStorage();
-  console.log('Status: online, upload data to server ...');
+  initAndRenderData();
+  console.log('Статус: онлайн, завантажую дані на сервер...');
 }
 
 const onOffline = () => {
-  console.log('Missing connection, switching to offline mode ...');
+  console.log('Відсутнє підключення, перемикаюсь у офлайн режим...');
 }
 
-
-// Bind listeners to the DOM
 const addButton = getById('submitBtn');
 addButton.onclick = onSubmitPress;
 window.addEventListener('online', onOnline);
 window.addEventListener('offline', onOffline);
-window.addEventListener('DOMContentLoaded', addDataReadToStorage);
+window.addEventListener('DOMContentLoaded', initAndRenderData);
